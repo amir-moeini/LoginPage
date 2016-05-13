@@ -6,6 +6,16 @@
     android:padding="40dp">
 
     <TextView
+        android:id="@+id/tvWelcomeMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Welcome Page"
+        android:textColor="@color/material_deep_teal_500"
+        android:textSize="30dp" />
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name" />

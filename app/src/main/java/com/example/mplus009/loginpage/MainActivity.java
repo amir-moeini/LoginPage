@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -20,8 +21,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etName = (TextView) findViewById(R.id.etName);
-        etAge = (TextView) findViewById(R.id.etAge);
+        final EditText etName = (EditText) findViewById(R.id.etName);
+        final EditText etAge = (EditText) findViewById(R.id.etAge);
+        final TextView welcomeMesseage = (TextView) findViewById(R.id.tvWelcomeMsg);
+
         etUsername = (TextView) findViewById(R.id.etUsername);
         bLogout = (Button) findViewById(R.id.bLogout);
 
@@ -34,10 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         if (authenticate() == true) {
-
-
+            displayUserDetail();
+        } else {
+            startActivity(new Intent(MainActivity.this, Login.class));
         }
     }
+
 
     private boolean authenticate() {
         return userLocalStore.ifUserLoggedIn();

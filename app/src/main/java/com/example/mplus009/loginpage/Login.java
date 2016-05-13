@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity {
 
     Button blogin;
     EditText etUsername, etPassword;
@@ -20,33 +20,69 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etUsername = (EditText) findViewById(R.id.etUsername);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        blogin = (Button) findViewById(R.id.bLogin);
-        RegisterHere = (TextView) findViewById(R.id.RegisterHere);
-        blogin.setOnClickListener(this);
+        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
+        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        final Button bLogin = (Button) findViewById(R.id.bLogin);
+        final TextView RegisterHere = (TextView) findViewById(R.id.RegisterHere);
+//        blogin.setOnClickListener(this);
+//
+//        blogin.setOnClickListener(this);
+        RegisterHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        blogin.setOnClickListener(this);
-        RegisterHere.setOnClickListener(this);
-        userLocalStore = new UserLocalStore(this);
+                Intent registerintent = new Intent(Login.this, Register.class);
+                Login.this.startActivity(registerintent);             //tells the current activity to open the Register activity
+            }
+        });
+//        userLocalStore = new UserLocalStore(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bLogin:
-
-                User user = new User(null, null);
-                userLocalStore.StoreUserData(user);
-                userLocalStore.setUserLoggedIn(true);
-
-                break;
-
-            case R.id.RegisterHere:
-
-                startActivity(new Intent(this, Register.class));
-
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.bLogin:
+//
+//                String username = etUsername.getText().toString();
+//                String password = etPassword.getText().toString();
+//                User user = new User(username, password);
+//
+//                authenticate(user);
+//                break;
+//
+//            case R.id.RegisterHere:
+//
+//                startActivity(new Intent(this, Register.class));
+//
+//                break;
+//        }
+//    }
+//    private void authenticate(User user){
+//
+//        RegisterRequests registerRequests = new RegisterRequests(this);
+//        registerRequests.fetchUserDataInBackground(user, new GetUserCallback() {
+//            @Override
+//            public void done(User returnedUser) {
+//                if (returnedUser == null){
+//                    showErrorMessage();
+//                }else {
+//                    logUserIn(returnedUser);
+//                }
+//            }
+//        });
+//    }
+//
+//    private void showErrorMessage(){
+//        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Login.this);
+//        alertDialog.setMessage("Incorrect User Detail");
+//        alertDialog.setPositiveButton("OK", null);
+//        alertDialog.show();
+//    }
+//
+//    private void logUserIn(User user){
+//        userLocalStore.StoreUserData(user);
+//        userLocalStore.setUserLoggedIn(true);
+//
+//        startActivity(new Intent(this, MainActivity.class));
+//    }
 }
